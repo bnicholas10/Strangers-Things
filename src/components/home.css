@@ -1,0 +1,12 @@
+#homeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 650px;
+  border-radius: 65%;
+  box-shadow: 0px 15px 30px black;
+  border: double 6px goldenrod;
+}

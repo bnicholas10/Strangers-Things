@@ -1,0 +1,34 @@
+#loginField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loginField input {
+  display: block;
+  margin-bottom: 10px;
+  width: 280px;
+  height: 40px;
+  padding: 5px;
+}
+
+#loginField button {
+  width: 293px;
+  height: 30px;
+}
+
+#loginField a {
+  color: black;
+  display: block;
+  margin: 10px;
+  position: relative;
+  left: 100px;
+}
+
+#loginField a:hover {
+  color: navy;
+}
+
+#loginField p {
+  color: red;
+}

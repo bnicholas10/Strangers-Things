@@ -1,0 +1,51 @@
+#addForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#addForm input {
+  display: block;
+  margin-bottom: 10px;
+  width: 280px;
+  height: 40px;
+  padding: 5px;
+}
+
+#addForm button {
+  width: 293px;
+  height: 30px;
+}
+
+#addForm a {
+  color: black;
+  display: block;
+  margin: 10px;
+  position: relative;
+  left: 100px;
+}
+
+#addForm a:hover {
+  color: navy;
+}
+
+#delivery {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 294px;
+  height: 35px;
+  margin-bottom: 10px;
+  /* background-color: red; */
+}
+
+#delivery input {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.error {
+  color: red;
+}

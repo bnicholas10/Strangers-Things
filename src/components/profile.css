@@ -1,0 +1,43 @@
+#profile {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+#profileTitle {
+  align-self: center;
+}
+
+.subSection {
+  display: flex;
+  flex-direction: column;
+  height: 455px;
+  background-color: cornflowerblue;
+  overflow: auto;
+  box-shadow: 0px 5px 10px -1px black;
+  border: solid black 2px;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+.post {
+  background-color: white;
+}
+
+.subSection::-webkit-scrollbar {
+  display: none;
+}
+
+.subSection h1 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0px 5px 10px whitesmoke;
+  text-decoration: underline;
+}
+
+#myInbox,
+#myOutbox {
+  height: 285px;
+}
