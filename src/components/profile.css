@@ -6,17 +6,29 @@
 
 #profileTitle {
   align-self: center;
+  font-family: "Roboto", sans-serif;
 }
 
 .subSection {
   display: flex;
   flex-direction: column;
+  font-family: "Roboto", sans-serif;
+
   height: 455px;
-  background-color: cornflowerblue;
+  background: rgb(0, 0, 128, 0.5);
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 128, 0.8) 0%,
+    rgba(100, 147, 237, 0.8) 40%,
+    rgba(196, 211, 240, 0.8) 100%
+  );
   overflow: auto;
   box-shadow: 0px 5px 10px -1px black;
-  border: solid black 2px;
+  border: solid black 1px;
   margin-bottom: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+
   padding: 5px;
 }
 
@@ -34,10 +46,17 @@
   margin-left: auto;
   margin-right: auto;
   text-shadow: 0px 5px 10px whitesmoke;
+  letter-spacing: 6px;
   text-decoration: underline;
 }
 
 #myInbox,
 #myOutbox {
   height: 285px;
+}
+
+.messageLink {
+  color: black;
+  margin: 0;
+  letter-spacing: 1px;
 }

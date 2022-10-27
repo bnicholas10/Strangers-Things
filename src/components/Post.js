@@ -2,10 +2,12 @@ import { useParams, Route, Routes, Link, useNavigate } from "react-router-dom";
 import EditPost from "./EditPost";
 import { useState } from "react";
 import { deletePost, fetchPosts, sendMessage } from "../api";
+import "./post.css";
 
 const Post = (props) => {
   const { posts, setPosts, token } = props;
   const [message, setMessage] = useState("");
+  const [messageSent, setMessageSent] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
   const selectedPost = posts.filter((post) => post._id === params.postId)[0];
@@ -21,10 +23,22 @@ const Post = (props) => {
     navigate("/profile");
   };
 
+  const messageSentReset = () => {
+    setMessageSent(false);
+    return;
+  };
+
   const handleSendMessage = async (event) => {
     event.preventDefault();
     const result = await sendMessage(selectedPost._id, token, message);
-    setMessage("");
+    if (result.success) {
+      setMessage("");
+      setMessageSent(true);
+      setTimeout(() => {
+        messageSentReset();
+      }, 2000);
+    }
+
     console.log("RESULTS: ", result);
   };
 
@@ -35,13 +49,15 @@ const Post = (props) => {
   return (
     <div>
       <div className="post">
-        <h3>Title: {selectedPost.title} </h3>
-        <p>Description: {selectedPost.description} </p>
-        <p>Price: {selectedPost.price} </p>
-        <span>
-          Location: {selectedPost.location}{" "}
-          {selectedPost.willDeliver && <span>. Will Deliver!</span>}
-        </span>
+        <h3>{selectedPost.title} </h3>
+        <div className="content">
+          <p>{`-"${selectedPost.description}"`} </p>
+          <p>Price: {selectedPost.price} </p>
+          <span>
+            Location: {selectedPost.location}{" "}
+            {selectedPost.willDeliver && <span>. Will Deliver!</span>}
+          </span>
+        </div>
         {selectedPost.isAuthor ? (
           <div>
             <Link to={"edit"}>
@@ -52,6 +68,7 @@ const Post = (props) => {
         ) : (
           <form onSubmit={handleSendMessage}>
             <input
+              id="messageBox"
               type="text"
               placeholder="Message User"
               value={message}
@@ -61,28 +78,36 @@ const Post = (props) => {
               }}
             />
             <button>Send Message</button>
+            {messageSent && <span>Message sent!</span>}
           </form>
         )}
       </div>
       {selectedPost.isAuthor && (
         <div>
           {selectedPost.messages.length ? (
-            <div>
+            <div id="messages">
               <h2>Messages:</h2>
               {selectedPost.messages.map((message, index) => (
                 <span className="message" key={index}>
-                  <h4>From: {message.fromUser.username}</h4>
-                  <p>Message: {message.content}</p>
+                  <div className="content">
+                    <h4>From: {message.fromUser.username}</h4>
+                    <p>Message: {message.content}</p>
+                  </div>
                 </span>
               ))}
             </div>
           ) : (
-            <span>No messages yet</span>
+            <span id="noMessages">No messages yet</span>
           )}
         </div>
       )}
       <Routes>
-        <Route element={<EditPost post={selectedPost} />} path="edit" />
+        <Route
+          element={
+            <EditPost token={token} post={selectedPost} setPosts={setPosts} />
+          }
+          path="edit"
+        />
       </Routes>
     </div>
   );

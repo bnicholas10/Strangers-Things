@@ -10,13 +10,12 @@ const Posts = (props) => {
   useEffect(() => {
     setFilteredPosts(
       posts.filter(
-        //refine to compare all values as lowercase
         (post) =>
-          post.title.includes(queryString) ||
-          post.description.includes(queryString) ||
-          post.price.includes(queryString) ||
-          post.location.includes(queryString) ||
-          post.author.username.includes(queryString)
+          post.title.toLowerCase().includes(queryString.toLowerCase()) ||
+          post.description.toLowerCase().includes(queryString.toLowerCase()) ||
+          post.price.toLowerCase().includes(queryString.toLowerCase()) ||
+          post.location.toLowerCase().includes(queryString.toLowerCase()) ||
+          post.author.username.toLowerCase().includes(queryString.toLowerCase())
       )
     );
   }, [posts, queryString]);
@@ -28,6 +27,7 @@ const Posts = (props) => {
         <h2>Listings</h2>
         <div>
           <input
+            id="searchBar"
             type="text"
             placeholder="Search Posts..."
             onChange={(e) => {
@@ -43,12 +43,13 @@ const Posts = (props) => {
       </div>
       {filteredPosts.map((post, index) => (
         <div className="post" key={index}>
-          <h4>{post.title}</h4>
-          <p>{post.description}</p>
-          <p>Price: {post.price}</p>
-          <p>Seller: {post.author.username}</p>
-          <p>Location: {post.location}</p>
-
+          <h3>{post.title}</h3>
+          <div className="content">
+            <p>{`-"${post.description}"`}</p>
+            <p>Price: {post.price}</p>
+            <p>Seller: {post.author.username}</p>
+            <p>Location: {post.location}</p>
+          </div>
           {token &&
             (post.isAuthor ? (
               <Link to={post._id}>

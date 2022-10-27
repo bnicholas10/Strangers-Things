@@ -132,6 +132,40 @@ export const deletePost = async (postId, token) => {
   }
 };
 
+export const editPost = async (
+  token,
+  postId,
+  title,
+  description,
+  price,
+  location,
+  willDeliver
+) => {
+  try {
+    const url = `${BASE_URL}/posts/${postId}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          location,
+          willDeliver,
+        },
+      }),
+    });
+    const info = await response.json();
+    return info;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const sendMessage = async (postId, token, message) => {
   try {
     const url = `${BASE_URL}/posts/${postId}/messages`;

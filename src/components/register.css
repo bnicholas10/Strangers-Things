@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+#registrationField h1 {
+  font-family: "Roboto", sans-serif;
+}
+
 #registrationField input {
   display: block;
   margin-bottom: 10px;
@@ -15,6 +19,7 @@
 #registrationField button {
   width: 293px;
   height: 30px;
+  font-family: "Roboto", sans-serif;
 }
 
 #registrationField a {

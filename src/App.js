@@ -30,8 +30,11 @@ function App() {
   };
 
   const handleFetchUser = async (token) => {
-    const userData = await fetchUser(token);
-    setUser(userData.data);
+    if (!token) {
+      return;
+    }
+    const user = await fetchUser(token);
+    setUser(user.data);
   };
 
   useEffect(() => {
@@ -39,7 +42,7 @@ function App() {
     handleFetchUser(token);
   }, [token]);
 
-  console.log("USER", user);
+  // console.log("USER", user);
   return (
     <div className="App">
       <Navbar token={token} setToken={setToken} />

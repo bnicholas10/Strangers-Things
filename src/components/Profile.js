@@ -9,10 +9,10 @@ const Profile = (props) => {
   useEffect(() => {
     setMessages(user.messages);
   }, [user]);
-
+  console.log(messages);
   return (
     <div id="profile">
-      <h1 id="profileTitle">{`Welcome, ${user.username}!`}</h1>
+      <h1 id="profileTitle">{`Welcome, ${user.username}`}</h1>
       <div id="myPosts" className="subSection">
         <h1>My posts</h1>
         {posts
@@ -20,10 +20,12 @@ const Profile = (props) => {
           .map((post, index) => (
             <div className="post" key={index}>
               <h3>{post.title}</h3>
-              <p>{`-"${post.description}"`}</p>
-              <p>Price: {post.price}</p>
-              <p>Seller: {post.author.username}</p>
-              <p>Location: {post.location}</p>
+              <div className="content">
+                <p>{`-"${post.description}"`}</p>
+                <p>Price: {post.price}</p>
+                <p>Seller: {post.author.username}</p>
+                <p>Location: {post.location}</p>
+              </div>
               <Link to={`../posts/${post._id}`}>
                 <button>View Post</button>
               </Link>
@@ -36,9 +38,12 @@ const Profile = (props) => {
           messages
             .filter((message) => message.fromUser.username !== user.username)
             .map((message, index) => (
-              <div className="post" key={index}>
+              <div id className="post" key={index}>
                 <h3>{`From: ${message.fromUser.username}`}</h3>
                 <p>{`-"${message.content}"`}</p>
+                <Link to={`../posts/${message.post._id}`}>
+                  <p className="messageLink">{`From post: ${message.post.title}`}</p>
+                </Link>
               </div>
             ))
         ) : (
@@ -52,8 +57,10 @@ const Profile = (props) => {
             .filter((message) => message.fromUser.username === user.username)
             .map((message, index) => (
               <div className="post" key={index}>
-                <h3>{`On Post: ${message.post.title}`}</h3>
                 <p>{`-"${message.content}"`}</p>
+                <Link to={`../posts/${message.post._id}`}>
+                  <p className="messageLink">{`Regarding Post: ${message.post.title}`}</p>
+                </Link>
               </div>
             ))
         ) : (
